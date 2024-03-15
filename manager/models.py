@@ -23,7 +23,10 @@ class Task(models.Model):
         default="LOW",
     )
     task_type = models.ForeignKey("TaskType", on_delete=models.CASCADE)
-    assignees = models.ManyToManyField()
+    assignees = models.ManyToManyField("Worker", related_name="assignees")
+
+    class Meta:
+        ordering = ["priority"]
 
 
 class TaskType(models.Model):
