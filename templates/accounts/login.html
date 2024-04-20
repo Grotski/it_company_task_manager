@@ -1,0 +1,82 @@
+{% extends "base-auth.html" %}
+{% load static %}
+{% block content %}
+<body>
+    <div class="auth-wrapper">
+        <div class="auth-content">
+            <div class="auth-bg">
+                <span class="r"></span>
+                <span class="r s"></span>
+                <span class="r s"></span>
+                <span class="r"></span>
+            </div>
+            <div class="card">
+                <div class="card-body text-center">
+
+                    <h3 class="mb-4">Login</h3>
+
+                    <span class="mb-0 text-muted">
+                        
+                            Default Login: <strong>test / ApS12_ZZs8</strong>
+                         
+                    </span>
+
+                    <br />
+                    <br />
+
+                    <form role="form" method="post" action="">
+
+                        <input type="hidden" name="csrfmiddlewaretoken" value="6KaVFxQUnfnC7luvzABo8ixNbIPgKlOeiXBfcNSdT4bwqdeSdsTDxxpCt3eAZlgO">                   
+
+                        <div class="input-group mb-3">
+                            <input type="text" name="username" placeholder="Username" class="form-control" value="test" required id="id_username">
+                        </div>
+                        
+                        <div class="input-group mb-4">
+                            <input type="password" name="password" placeholder="Password" class="form-control" value="ApS12_ZZs8" required id="id_password">
+                        </div>
+                        
+                        <button type="submit" name="login" class="btn btn-primary shadow-2 mb-4">Login</button>
+
+                    </form>
+
+                    <p class="mb-0 text-muted">Don’t have an account? <a href="/register/" >Sign UP</a></p>
+
+                    <br />
+
+                    
+                    <div class="mx-2">
+                        <form method="post" action="/social_login/github/login/?next=%2F">
+                            <input type="hidden" name="csrfmiddlewaretoken" value="6KaVFxQUnfnC7luvzABo8ixNbIPgKlOeiXBfcNSdT4bwqdeSdsTDxxpCt3eAZlgO">
+                            <button class="btn btn-light" type="submit" style="background-color: #ffffff; border-color: #ffffff;">
+                                <i class="feather icon-github auth-icon"></i></button>
+                        </form>
+                        <span class="mx-1">Sign IN with GitHub</span>
+                    </div>                   
+                       
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Enable the dark mode -->
+    <label class="d-none">
+        <i class="icon feather icon-sun" id="theme-indicator"></i>
+        <input type="checkbox" id="theme-switch" class="d-none">
+    </label>
+
+    <script src="https://appsrv1-147a1.kxcdn.com/data-able-v100-enh1/js/vendor-all.min.js"></script>
+<script src="https://appsrv1-147a1.kxcdn.com/data-able-v100-enh1/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://appsrv1-147a1.kxcdn.com/data-able-v100-enh1/js/pcoded.min.js"></script>
+<script src="https://appsrv1-147a1.kxcdn.com/data-able-v100-enh1/js/dark-mode.js"></script>
+
+
+    <!-- Specific Page JS goes HERE  -->
+        
+
+</body>
+</html>
+{% endblock %}

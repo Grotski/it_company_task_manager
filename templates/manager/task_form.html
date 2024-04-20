@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>{{ object|yesno:"Update,Create" }} Task</h5>
+        </div>
+        <div class="card-body">
+          <div class="col-md-6">
+            <form action="" method="post" novalidate>
+              {% csrf_token %}
+              <div class="form-group">
+               {{ form.name }}
+              </div>
+              <div class="form-group">
+                {{ form.description }}
+              </div>
+              <div class="form-group">
+                {{ form.deadline }}
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Select priority:</label>
+                {{ form.priority }}
+              </div>
+              <div class="form-group">
+                <label for="customCheck1">Select task type:</label>
+                {{ form.task_type }}
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Select worker:</label>
+                {{ form.assignees }}
+              </div>
+              <input type="submit" value="Submit" class="btn btn-primary">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

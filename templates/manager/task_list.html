@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <div class="row">
+    <div class="col-xl-12 col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5>
+            Tasks
+          </h5>
+          <a href="{% url 'manager:task-create' %}" class="btn btn-outline-success" style="float: right">
+            Add Task
+          </a>
+        </div>
+        <div class="card-block table-border-style">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Task name</th>
+                  <th>Task priority</th>
+                  <th>Developer assigned to task</th>
+                  <th>Deadline</th>
+                  <th>Task progress</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for tasks in tasks_list %}
+                <tr class="unread">
+                  <th scope="row">
+                    {{ forloop.counter }}
+                  </th>
+                  <td>
+                    <h6 class="mb-1">
+                      <a href="{% url 'manager:task-detail' pk=tasks.id%}">{{ tasks.name }}</a>
+                    </h6>
+                  </td>
+                  <td>
+                    <span>{{ tasks.priority }}</span>
+                  </td>
+                  <td>
+                    {% for assignee in tasks.assignees.all %}
+                    	{% if assignee.first_name %}
+                    		<h5 class="mb-1">
+                          {{ assignee.first_name }}
+                        </h5>
+                      {% else %}
+                        <p class="mb-1">
+                          {{ assignee.username }}
+                        </p>
+                    	{% endif %}
+                    {% endfor %}
+                  </td>
+                  <td>
+                    <h6 class="mb-1">
+                      {{ tasks.deadline }}
+                    </h6>
+                  </td>
+                  <td>
+                    <h6 class="mb-1">
+                      {{ tasks.is_completed }}
+                    </h6>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
