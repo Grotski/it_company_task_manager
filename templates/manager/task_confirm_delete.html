@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+  <form action="" method="post">
+    {% csrf_token %}
+    <h5>Are you sure you want to delete Task?</h5>
+    <hr>
+    <div>
+      <input type="submit" class="btn btn-warning" value="Confirm">
+      <a href="{% url 'manager:task-list' %}">No</a>
+    </div>
+  </form>
+{% endblock %}

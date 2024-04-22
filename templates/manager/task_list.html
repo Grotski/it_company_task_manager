@@ -42,9 +42,9 @@
                   <td>
                     {% for assignee in tasks.assignees.all %}
                     	{% if assignee.first_name %}
-                    		<h5 class="mb-1">
+                    		<p class="mb-1">
                           {{ assignee.first_name }}
-                        </h5>
+                        </p>
                       {% else %}
                         <p class="mb-1">
                           {{ assignee.username }}
@@ -61,6 +61,12 @@
                     <h6 class="mb-1">
                       {{ tasks.is_completed }}
                     </h6>
+                  </td>
+                  <td>
+                    <a class="btn btn-primary" href="{% url 'manager:task-update' pk=tasks.id %}">Update</a>
+                  </td>
+                  <td>
+                    <a class="btn btn-danger" href="{% url 'manager:task-delete' pk=tasks.id %}">Delete</a>
                   </td>
                 </tr>
               {% endfor %}

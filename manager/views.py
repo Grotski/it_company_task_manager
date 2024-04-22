@@ -60,6 +60,17 @@ class TaskCreateView(generic.CreateView):
     # deadline = forms.DateTimeField(input_formats=["%Y/%m/%d %H:%M"], widget=BootstrapDateTimePickerInput())
 
 
+class TaskUpdateView(generic.UpdateView):
+    model = Task
+    fields = "__all__"
+    success_url = reverse_lazy("manager:task-list")
+
+
+class TaskDeleteView(generic.DeleteView):
+    model = Task
+    success_url = reverse_lazy("manager:task-list")
+
+
 def add_remove_from_task(request, pk):
     worker = Worker.objects.get(id=request.user.id)
     if Task.objects.get(id=pk) in worker.assignees.all():
