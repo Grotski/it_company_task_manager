@@ -10,7 +10,8 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import CreateView
 
-# from manager.forms import TaskCreationForm
+from manager.forms import TaskSearchForm
+# from .forms import TaskCreationForm
 from manager.models import Task, Worker
 
 
@@ -38,7 +39,7 @@ def tables(request):
 
 class WorkerListView(generic.ListView):
     model = Worker
-    paginate_by = 5
+    paginate_by = 10
     queryset = Worker.objects.all()
 
 
@@ -46,7 +47,24 @@ class TaskListView(generic.ListView):
     model = Task
     context_object_name = "tasks_list"
     template_name = "manager/task_list.html"
-    paginate_by = 5
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super(TaskListView, self).get_context_data(**kwargs)
+        name = self.request.GET.get("name", "")
+        context["search_form"] = TaskSearchForm(
+            initial={"name": name}
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = Task.objects.all()
+        form = TaskSearchForm(self.request.GET)
+        if form.is_valid():
+            return queryset.filter(
+                name__icontains=form.cleaned_data["name"]
+            )
+        return queryset
 
 
 class TaskDetailView(generic.DetailView):
@@ -57,6 +75,7 @@ class TaskCreateView(generic.CreateView):
     model = Task
     # form_class = TaskCreationForm
     fields = ["name", "description", "deadline", "priority", "task_type", "assignees",]
+    success_url = reverse_lazy("manager:task-list")
     # deadline = forms.DateTimeField(input_formats=["%Y/%m/%d %H:%M"], widget=BootstrapDateTimePickerInput())
 
 
