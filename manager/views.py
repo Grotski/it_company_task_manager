@@ -10,7 +10,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import CreateView
 
-from manager.forms import TaskSearchForm
+from manager.forms import TaskSearchForm, TaskForm
 # from .forms import TaskCreationForm
 from manager.models import Task, Worker
 
@@ -32,7 +32,7 @@ def index(request):
 
 def tables(request):
     context = {
-        'segment': 'tables'
+        "segment": "tables"
     }
     return render(request, "pages/components/dynamic-tables.html", context)
 
@@ -44,7 +44,7 @@ class WorkerListView(generic.ListView):
 
 
 class TaskListView(generic.ListView):
-    model = Task
+    model = TaskForm
     context_object_name = "tasks_list"
     template_name = "manager/task_list.html"
     paginate_by = 10
@@ -100,16 +100,16 @@ def add_remove_from_task(request, pk):
 
 
 class UserRegistrationView(CreateView):
-  template_name = 'accounts/auth-signup.html'
-  form_class = RegistrationForm
-  success_url = '/accounts/login/'
+    template_name = "accounts/auth-signup.html"
+    form_class = RegistrationForm
+    success_url = "/accounts/login/"
 
 
 class UserLoginView(LoginView):
-  template_name = 'accounts/auth-signin.html'
-  form_class = LoginForm
+    template_name = "accounts/auth-signin.html"
+    form_class = LoginForm
 
 
 def logout_view(request):
-  logout(request)
-  return redirect('/accounts/login/')
+    logout(request)
+    return redirect("/accounts/login/")

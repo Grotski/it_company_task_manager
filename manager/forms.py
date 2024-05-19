@@ -11,7 +11,8 @@ class TaskForm(forms.ModelForm):
         queryset=get_user_model().objects.all(),
         widget=forms.CheckboxSelectMultiple(),
         required=False,
-    )
+    ),
+    is_completed = forms.CheckboxInput()
 
     class Meta:
         model = Task
@@ -23,7 +24,7 @@ class TaskForm(forms.ModelForm):
 #
 #     class Meta:
 #         model = Task
-#         fields = "__all__"
+#         # fields = "__all__"
 #         fields = ["name", "description", "deadline", "priority", "task_type", "assignees", ]
 #         exclude = ["is_completed", ]
 #         widgets = {
