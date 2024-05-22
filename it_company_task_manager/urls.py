@@ -27,6 +27,7 @@ urlpatterns = [
     path("__debug__/", include("debug_toolbar.urls")),
     path("", include('admin_datta.urls')),
     path('', include('django_dyn_dt.urls')),
+    path("social-auth/", include("social_django.urls", namespace="social")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 try:
