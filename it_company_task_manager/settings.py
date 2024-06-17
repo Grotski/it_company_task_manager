@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "social_django",
     "manager",
+    "django_counties",
 ]
 
 AUTHENTICATION_BACKENDS = [
